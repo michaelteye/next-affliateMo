@@ -2,7 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./navbar";
-import { Suspense } from "react";
+import { SessionProvider } from "next-auth/react";
+import Authprovider from "./auth/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="cupcake">
       <body className={inter.className}>
-        <main>
+        <Authprovider>
           <Navbar />
-          {children}
-        </main>
+          <main>{children}</main>
+        </Authprovider>
       </body>
     </html>
   );
